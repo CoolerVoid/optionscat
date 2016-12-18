@@ -25,12 +25,16 @@ $ cd ..
 $ bin/optionscat     (NOTE: note use cd bin; ./optionscat need real path)
 
 Enter in your browser at:
-https://127.0.0.1
+https://127.0.0.1:1347
 
 Only address 127.0.0.1 can view the program.
+
+NOTE: at second execution if return error, you need kill old process at port 1347
+$ fuser -k -n tcp 1347
 
 # At the future
 
 * Remote CSV download of google finance and yahoo fianance
 * Options to digest CSV to black scholes table
 * CRUD to trade risk manager
+* Plot Gain and loss of all trades
