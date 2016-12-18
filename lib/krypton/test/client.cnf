@@ -1,0 +1,11 @@
+[req]
+req_extensions = v3_req
+distinguished_name = dn
+prompt = no
+
+[dn]
+CN = some.random.user
+
+[v3_req]
+keyUsage = keyAgreement, keyEncipherment
+extendedKeyUsage = clientAuth

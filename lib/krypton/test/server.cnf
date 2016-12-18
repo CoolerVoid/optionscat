@@ -1,0 +1,18 @@
+[req]
+req_extensions = v3_req
+distinguished_name = dn
+prompt = no
+
+[dn]
+CN = do.not.use.me
+
+[v3_req]
+keyUsage = keyAgreement, keyEncipherment
+extendedKeyUsage = serverAuth
+subjectAltName = @alt_names
+
+[alt_names]
+IP.1 = 127.0.0.1
+DNS.1 = localhost
+DNS.2 = never.use.me
+DNS.3 = except.for.tests
