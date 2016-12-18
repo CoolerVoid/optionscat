@@ -1,10 +1,9 @@
 #include "compound.h"
 #include "../lib/libmongoose/mongoose.h"
 #include "../lib/BSD/strsec.h"
-#include "mem_ops.h"
 
 // return json with compound interest of years
-void calc_compound_interest(struct mg_connection *c,double principle, double rate, double time) 
+void calc_compound_interest(struct mg_connection *c,double principle, double rate, double times) 
 {
 
     	double amount=0, interest=0; 
@@ -13,25 +12,25 @@ void calc_compound_interest(struct mg_connection *c,double principle, double rat
     	size_t len=1;
 // TODO improve this limit, to return debug error..
 
-	if(time>50 || time < 2)
+	if(times>50 || times < 2)
 	{
 		DEBUG("error at limit");
-		time=5;
+		times=5;
 	}
 
 	json_interest=strdup("{");	  
 
-		while(time)
+		while(times)
 		{	 
 			memset(tmp,0,20);
 			tmp[20]='\0';	
-    			amount = principle*pow(1+(rate/100),time); 
+    			amount = principle*pow(1+(rate/100),times); 
     			interest = amount-principle;
-			snprintf(tmp,21,"\"%1.f\":\"%.f\", ",time,interest);
+			snprintf(tmp,21,"\"%1.f\":\"%.f\", ",times,interest);
 			len += strlen(tmp);
 			json_interest = xrealloc(json_interest,len);
 			strlcat(json_interest,tmp,len); 
-			time--; 
+			times--; 
 		}
 
 	*(json_interest+(strlen(json_interest)-2))='\0';

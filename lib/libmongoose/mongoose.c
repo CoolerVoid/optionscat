@@ -3593,7 +3593,7 @@ int mg_normalize_uri_path(const struct mg_str *in, struct mg_str *out) {
 #define MG_DISABLE_CGI 1
 #endif
 
-static const char *mg_version_header = "Code Warrior";
+static const char *mg_version_header = "OptionsCat";
 
 enum mg_http_proto_data_type { DATA_NONE, DATA_FILE, DATA_PUT };
 
@@ -5110,7 +5110,7 @@ void mg_send_response_line(struct mg_connection *nc, int status_code,
       status_message = "Internal Server Error";
       break;
   }
-  mg_printf(nc, "HTTP/1.1 %d %s\r\nServer: %s\r\nX-Frame-Options: SAMEORIGIN\r\nX-Content-Type-Options: nosniff\r\nStrict-Transport-Security: max-age=7776000\r\n", status_code, status_message,
+  mg_printf(nc, "HTTP/1.1 %d %s\r\nServer: %s\r\nX-Frame-Options: SAMEORIGIN\r\nX-Content-Type-Options: nosniff\r\nStrict-Transport-Security: max-age=7776000\r\nX-XSS-Protection: 1; mode=block\r\n", status_code, status_message,
             mg_version_header);
   if (extra_headers != NULL) {
     mg_printf(nc, "%s\r\n", extra_headers);
