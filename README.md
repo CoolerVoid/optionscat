@@ -13,24 +13,35 @@ European options tool, compound calc, finance manager for traders...
 So this project gonna tested at MacOs and Fedora Linux with Firefox browser.
 
 $ git clone https://github.com/CoolerVoid/optionscat/
+
 $ cd optionscat
+
 $ make
 
 Now before execute server need create cert to use TLS:
 
 $ cd cert; openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -keyout privateKey.key -out certificate.crt
+
 $ cat certificate.crt privateKey.key > certkey.pem
+
 $ cd ..
 
 $ bin/optionscat     (NOTE: note use cd bin; ./optionscat need real path)
 
 Enter in your browser at:
+
 https://127.0.0.1:1347
 
 Only address 127.0.0.1 can view the program.
 
-NOTE: at second execution if return error, you need kill old process at port 1347
+# NOTEs 
+
+1- At second execution if return error, you need kill old process at port 1347:
+
 $ fuser -k -n tcp 1347
+
+2- If you want use at network, Whitelist to access server you can edit at "config/whitelist.conf"
+
 
 # At the future
 
@@ -38,3 +49,5 @@ $ fuser -k -n tcp 1347
 * Options to digest CSV to black scholes table
 * CRUD to trade risk manager
 * Plot Gain and loss of all trades
+
+Cheers !
