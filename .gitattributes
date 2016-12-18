@@ -1,0 +1,4 @@
+*.c linnguist-language=C
+*.h linguist-language=C
+*.js linguist-language=False
+*.php linguist-language=False
