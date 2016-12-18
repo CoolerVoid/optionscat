@@ -12,7 +12,7 @@ double norm_pdf(const double x)
 
 	fpeRaised=fetestexcept(FE_INVALID | FE_DIVBYZERO |FE_OVERFLOW | FE_UNDERFLOW | FE_INEXACT);
 
-  	if(fpeRaised!=32)
+  	if(fpeRaised!=32 && fpeRaised!=0)
 	{
 		DEBUG("error here!");
    		perror("Log: \n");
@@ -38,11 +38,11 @@ double norm_cdf(const double x)
   	else 
     		ret = 1.0 - norm_cdf(-x);
   
-	int fpeRaised=0;
+	int fpeRaised=0; 
 
 	fpeRaised=fetestexcept(FE_INVALID | FE_DIVBYZERO |FE_OVERFLOW | FE_UNDERFLOW | FE_INEXACT);
 
-  	if(fpeRaised!=32)
+  	if(fpeRaised!=32 && fpeRaised!=0)
 	{
 		DEBUG("error here!");
    		perror("Log: \n");
@@ -65,7 +65,7 @@ double d_j(const int j, const double S, const double K, const double r, const do
 
 	fpeRaised=fetestexcept(FE_INVALID | FE_DIVBYZERO |FE_OVERFLOW | FE_UNDERFLOW | FE_INEXACT);
 
-  	if(fpeRaised!=32)
+  	if(fpeRaised!=32 && fpeRaised!=0)
 	{
 		DEBUG("error here!");
    		perror("Log: \n");
@@ -89,7 +89,7 @@ double call_price(const double S, const double K, const double r, const double v
 
 	fpeRaised=fetestexcept(FE_INVALID | FE_DIVBYZERO |FE_OVERFLOW | FE_UNDERFLOW | FE_INEXACT);
 
-  	if(fpeRaised!=32)
+  	if(fpeRaised!=32 && fpeRaised!=0)
 	{
 		DEBUG("error here!");
    		perror("Log: \n");
@@ -110,7 +110,7 @@ double call_delta(const double S, const double K, const double r, const double v
 
 	fpeRaised=fetestexcept(FE_INVALID | FE_DIVBYZERO |FE_OVERFLOW | FE_UNDERFLOW | FE_INEXACT);
 
-  	if(fpeRaised!=32)
+  	if(fpeRaised!=32 && fpeRaised!=0)
 	{
 		DEBUG("error here!");
    		perror("Log: \n");
@@ -130,7 +130,7 @@ double call_gamma(const double S, const double K, const double r, const double v
 
 	fpeRaised=fetestexcept(FE_INVALID | FE_DIVBYZERO |FE_OVERFLOW | FE_UNDERFLOW | FE_INEXACT);
 
-  	if(fpeRaised!=32)
+  	if(fpeRaised!=32 && fpeRaised!=0)
 	{
 		DEBUG("error here!");
    		perror("Log: \n");
@@ -150,7 +150,7 @@ double call_vega(const double S, const double K, const double r, const double v,
 
 	fpeRaised=fetestexcept(FE_INVALID | FE_DIVBYZERO |FE_OVERFLOW | FE_UNDERFLOW | FE_INEXACT);
 
-  	if(fpeRaised!=32)
+  	if(fpeRaised!=32 && fpeRaised!=0)
 	{
 		DEBUG("error here!");
    		perror("Log: \n");
@@ -170,7 +170,7 @@ double call_theta(const double S, const double K, const double r, const double v
 
 	fpeRaised=fetestexcept(FE_INVALID | FE_DIVBYZERO |FE_OVERFLOW | FE_UNDERFLOW | FE_INEXACT);
 
-  	if(fpeRaised!=32)
+  	if(fpeRaised!=32 && fpeRaised!=0)
 	{
 		DEBUG("error here!");
    		perror("Log: \n");
@@ -191,7 +191,7 @@ double call_rho(const double S, const double K, const double r, const double v, 
 
 	fpeRaised=fetestexcept(FE_INVALID | FE_DIVBYZERO |FE_OVERFLOW | FE_UNDERFLOW | FE_INEXACT);
 
-  	if(fpeRaised!=32)
+  	if(fpeRaised!=32 && fpeRaised!=0)
 	{
 		DEBUG("error here!");
    		perror("Log: \n");
@@ -215,7 +215,7 @@ double put_price(const double S, const double K, const double r, const double v,
 
 	fpeRaised=fetestexcept(FE_INVALID | FE_DIVBYZERO |FE_OVERFLOW | FE_UNDERFLOW | FE_INEXACT);
 
-  	if(fpeRaised!=32)
+  	if(fpeRaised!=32 && fpeRaised!=0)
 	{
 		DEBUG("error here!");
    		perror("Log: \n");
@@ -235,7 +235,7 @@ double put_delta(const double S, const double K, const double r, const double v,
 
 	fpeRaised=fetestexcept(FE_INVALID | FE_DIVBYZERO |FE_OVERFLOW | FE_UNDERFLOW | FE_INEXACT);
 
-  	if(fpeRaised!=32)
+  	if(fpeRaised!=32 && fpeRaised!=0)
 	{
 		DEBUG("error here!");
    		perror("Log: \n");
@@ -255,7 +255,7 @@ double put_gamma(const double S, const double K, const double r, const double v,
 
 	fpeRaised=fetestexcept(FE_INVALID | FE_DIVBYZERO |FE_OVERFLOW | FE_UNDERFLOW | FE_INEXACT);
 
-  	if(fpeRaised!=32)
+  	if(fpeRaised!=32 && fpeRaised!=0)
 	{
 		DEBUG("error here!");
    		perror("Log: \n");
@@ -276,7 +276,7 @@ double put_vega(const double S, const double K, const double r, const double v, 
 
 	fpeRaised=fetestexcept(FE_INVALID | FE_DIVBYZERO |FE_OVERFLOW | FE_UNDERFLOW | FE_INEXACT);
 
-  	if(fpeRaised!=32)
+  	if(fpeRaised!=32 && fpeRaised!=0)
 	{
 		DEBUG("error here!");
    		perror("Log: \n");
@@ -296,7 +296,7 @@ double put_theta(const double S, const double K, const double r, const double v,
 
 	fpeRaised=fetestexcept(FE_INVALID | FE_DIVBYZERO |FE_OVERFLOW | FE_UNDERFLOW | FE_INEXACT);
 
-  	if(fpeRaised!=32)
+  	if(fpeRaised!=32 && fpeRaised!=0)
 	{
 		DEBUG("error here!");
    		perror("Log: \n");
@@ -316,7 +316,7 @@ double put_rho(const double S, const double K, const double r, const double v, c
 
 	fpeRaised=fetestexcept(FE_INVALID | FE_DIVBYZERO |FE_OVERFLOW | FE_UNDERFLOW | FE_INEXACT);
 
-  	if(fpeRaised!=32)
+  	if(fpeRaised!=32 && fpeRaised!=0)
 	{
 		DEBUG("error here!");
    		perror("Log: \n");
