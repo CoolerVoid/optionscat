@@ -17,7 +17,7 @@ Investopedia http://www.investopedia.com/university/options-pricing/black-schole
 
 # Install
 
-So this project gonna tested at MacOs and Fedora Linux with Firefox browser.
+I tested this project in MacOs and Fedora Linux with Firefox browser, to install follow this steps at unix terminal:
 
 $ git clone https://github.com/CoolerVoid/optionscat/
 
