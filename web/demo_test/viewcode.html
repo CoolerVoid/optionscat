@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head profile="http://www.w3.org/2005/10/profile">
+<link rel="icon" 
+      type="image/png" 
+      href="img/kunai.png">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href=".img/favicon.ico">
+
+    <title>Warrior :: Code view ::</title>
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+     <link href="./css/mosca.css" rel="stylesheet">
+
+<script type="text/javascript" src="syntax/media/js/shCore.js"></script>
+<script type="text/javascript" src="syntax/media/js/shBrushXml.js"></script>
+<script type="text/javascript" src="syntax/media/js/shBrushCpp.js"></script>
+<script type="text/javascript" src="syntax/media/js/shBrushPhp.js"></script>
+<script type="text/javascript" src="syntax/media/js/shBrushRuby.js"></script>
+<script type="text/javascript" src="syntax/media/js/shBrushPython.js"></script>
+<script type="text/javascript" src="syntax/media/js/shBrushDelphi.js"></script>
+<script type="text/javascript" src="syntax/media/js/shBrushJava.js"></script>
+<script type="text/javascript" src="syntax/media/js/shBrushJScript.js"></script>
+<script type="text/javascript" src="syntax/media/js/shBrushBash.js"></script>
+<link type="text/css" rel="Stylesheet" href="syntax/media/css/shCoreRDark.css">
+<link type="text/css" rel="Stylesheet" href="syntax/media/css/shCore.css">
+
+
+<script language="javascript" type="text/javascript">
+  
+  var rooms = [];
+  var ws2 = new WebSocket('wss://127.0.0.1:1345');
+  ws2.onopen = function(evt) { onload(evt) };
+
+  ws2.onmessage = function(ev) {
+    var div = document.createElement('div');
+    div.innerHTML = ev.data;
+    document.getElementById('messages2').appendChild(div);
+    SyntaxHighlighter.highlight();
+    ws2.close();
+  };
+
+  window.onload = function() {
+ 	var obj = new Object();
+   	obj.action = "form2";
+   	obj.path = window.location.search;
+ 	var jsoninput= JSON.stringify(obj);
+        ws2.send(jsoninput);
+
+  };
+
+
+</script>
+
+  </head>
+
+  <body>
+
+
+    <div class="container">
+    <div class="row">
+
+
+<div class="row well" >
+
+
+
+    <div id="messages2">
+
+    </div>
+</div>
+
+
+      
+</div>
+
+    <script>window.jQuery || document.write('<script src="./js/jquery.min.js"><\/script>')</script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/mosca.js"></script>
+<script>
+  
+
+
+ 
+</script>
+  </body>
+</html>

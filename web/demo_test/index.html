@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head profile="http://www.w3.org/2005/10/profile">
+<link rel="icon" 
+      type="image/png" 
+      href="img/ninja2.jpg">
+  <meta charset="utf-8" />
+    <title>Code Warrior :: Manual analysis tool</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+     <link href="./css/mosca.css" rel="stylesheet">
+
+<script type="text/javascript" src="syntax/media/js/shCore.js"></script>
+<script type="text/javascript" src="syntax/media/js/shBrushXml.js"></script>
+<script type="text/javascript" src="syntax/media/js/shBrushCpp.js"></script>
+<script type="text/javascript" src="syntax/media/js/shBrushPhp.js"></script>
+<script type="text/javascript" src="syntax/media/js/shBrushRuby.js"></script>
+<script type="text/javascript" src="syntax/media/js/shBrushPython.js"></script>
+<script type="text/javascript" src="syntax/media/js/shBrushDelphi.js"></script>
+<script type="text/javascript" src="syntax/media/js/shBrushJava.js"></script>
+<script type="text/javascript" src="syntax/media/js/shBrushJScript.js"></script>
+<script type="text/javascript" src="syntax/media/js/shBrushBash.js"></script>
+<link type="text/css" rel="Stylesheet" href="syntax/media/css/shThemeEmacs.css">
+<link type="text/css" rel="Stylesheet" href="syntax/media/css/shCore.css">
+	<!-- Add fancyBox main JS and CSS files -->
+	<!-- Add jQuery library -->
+	<script type="text/javascript" src="source/jquery-1.10.1.min.js"></script>
+
+	<!-- Add mousewheel plugin (this is optional) -->
+	<script type="text/javascript" src="source/jquery.mousewheel-3.0.6.pack.js"></script>
+
+		<script type="text/javascript" src="source/jquery.fancybox.js?v=2.1.5"></script>
+		<link rel="stylesheet" type="text/css" href="source/jquery.fancybox.css?v=2.1.5" media="screen" />
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+
+			$('.fancybox').fancybox();
+	});
+	</script>
+
+
+
+
+<script language="javascript" type="text/javascript">
+
+function sleepFor( sleepDuration ){
+    var now = new Date().getTime();
+    while(new Date().getTime() < now + sleepDuration){ } 
+}
+
+  var rooms = [];
+  var ws = new WebSocket('wss://127.0.0.1:1345');
+  ws.onopen = function(evt) { onload(evt) };
+
+  ws.onmessage = function(ev) {	
+    sleepFor(150);
+    document.getElementById('loading').innerHTML = "";
+    var div = document.createElement('div');
+    div.innerHTML = ev.data; 
+    document.getElementById('messages').appendChild(div);
+    SyntaxHighlighter.highlight();
+
+
+  }
+
+  window.onload = function() {
+    document.getElementById('start').onclick = function(ev) {
+
+ 	var obj = new Object();
+   	obj.action = "form1";
+   	obj.path = document.getElementById('path').value;
+   	obj.module = document.getElementById('egg').value;
+   	obj.extension = document.getElementById('extension').value;
+ 	var jsoninput= JSON.stringify(obj);
+      	ws.send(jsoninput);
+      	document.getElementById('messages').innerHTML = "";
+      	document.getElementById('loading').innerHTML = '<center><h1>Loading...</h1><img src="img/ninjaloading.gif" width="500" height="400"></center>';
+
+    };
+
+
+    document.getElementById('sinksearch').onclick = function(ev) {
+
+ 	var obj = new Object();
+   	obj.action = "form3";
+   	obj.path = document.getElementById('path').value;
+   	obj.sink = document.getElementById('sink').value;
+   	obj.extension = document.getElementById('extension').value;
+ 	var jsoninput= JSON.stringify(obj);
+
+
+      	ws.send(jsoninput);
+        document.getElementById('messages').innerHTML = "";
+        document.getElementById('loading').innerHTML = '<center><h1>Loading...</h1><img src="img/ninjaloading.gif" width="500" height="400"></center>';
+
+    };
+
+
+    document.getElementById('tree').onclick = function(ev) {
+
+      document.getElementById('messages').innerHTML = "";
+
+ 	var obj = new Object();
+   	obj.action = "form4";
+   	obj.path = document.getElementById('path').value;
+   	obj.extension = document.getElementById('extension').value;
+ 	var jsoninput= JSON.stringify(obj);
+
+        ws.send(jsoninput);
+        document.getElementById('messages').innerHTML = "";
+        document.getElementById('loading').innerHTML = '<center><h1>Loading...</h1><img src="img/ninjaloading.gif" width="500" height="400"></center>';
+    };
+
+    document.getElementById('clear').onclick = function(ev) {
+      document.getElementById('messages').innerHTML = "";
+      document.getElementById('loading').innerHTML = "";
+
+    };
+
+    document.getElementById('egg').onkeypress = function(ev) {
+      if (ev.keyCode == 13 || ev.which == 13) {
+        document.getElementById('start').click();
+      }
+    };
+
+  };
+
+
+
+
+</script>
+
+
+  </head>
+
+  <body>
+
+    <div class="container">
+    <div class="row">
+
+  	<div class="col-md-4"><img src="img/warrior.png" alt="warrior"  width="400" height="400" align="right" ></div>
+    <div class="col-md-8">
+    <div class="jumbotron">
+        <h1 align="center" ><b>Code Warrior</b></h1>
+
+          <div class="input-group">
+            <span class="input-group-addon">Path:</span>
+            <input id="path" type="text" class="form-control" placeholder="/usr/share/code" aria-describedby="path">
+            
+          </div>
+          <div class="selections" align="center" >
+
+          <div class="input-group">
+            <span class="input-group-addon">Sink search:</span>
+            <input id="sink" type="text" class="form-control" placeholder="$var_name" aria-describedby="path">            
+          </div>
+	      Module: <select id="egg">
+  		<option value="eggs/c_common_failures.egg">C common fails</option>
+  		<option value="eggs/php_common_fail.egg">PHP common fails</option>
+  		<option value="eggs/csharp_common_fails.egg">C# common fails</option>
+  		<option value="eggs/java_common_fail.egg">Java common fails</option>
+  		<option value="eggs/ruby_common_fail.egg">Ruby common fails</option>
+  		<option value="eggs/javascript_common_fail.egg">javascript common fails</option>
+  		<option value="eggs/asp_common_fails.egg">ASP common fails</option>
+	      </select > 
+              Extension: <select id="extension">
+  		<option value=".(c|cpp)$">.c, .cpp</option>
+  		<option value=".php$">.php</option>
+  		<option value=".cs$">.cs</option>
+  		<option value=".(jad|java|class)$">.jad, .java, .class</option>
+  		<option value=".rb$">.rb</option>
+  		<option value=".(js|html)$">.js, .html</option>
+  		<option value=".(asp|aspx)$">.asp, .aspx</option>
+	      </select > <br>
+              Automaton: <select id="analyser">
+  		<option value="stack_c.dl">Stack overflow detector</option>
+  		<option value="xss_php.dl">XSS PHP detector</option>
+	      </select > <br>
+
+
+		<button id="start">Start</button><button id="sinksearch">Sink</button><button id="tree">Tree</button><button id="dlopen">dlopen</button> 
+<a class="fancybox fancybox.iframe" href="edit_module.html" ><button id="edit_link">Edit modules</button></a> <button id="clear">Clear screen</button> 
+
+
+          </div>
+          
+
+       </div>
+     </div>
+
+      </div>
+
+
+
+
+	<div class="row well">    
+<div id="loading"></div>
+		<div id="messages"></div>
+
+	</div>
+
+
+    <script>window.jQuery || document.write('<script src="./js/jquery.min.js"><\/script>')</script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/mosca.js"></script>
+
+
+
+  </body>
+</html>

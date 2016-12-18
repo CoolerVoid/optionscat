@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Options Cat v 0.1">
+    <meta name="author" content="Coolervoid Labs">
+    <link rel="shortcut icon" href="img/favicon.png">
+
+    <title>Options Cat v 0.1</title>
+	
+
+
+    <!-- Bootstrap CSS -->    
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- bootstrap theme -->
+    <link href="css/bootstrap-theme.css" rel="stylesheet">
+    <!--external css-->
+    <!-- font icon -->
+    <link href="css/elegant-icons-style.css" rel="stylesheet" />
+    <link href="css/font-awesome.min.css" rel="stylesheet" />    
+
+
+
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+      <script src="js/lte-ie7.js"></script>
+    <![endif]-->
+<link rel="stylesheet" href="css/pickmeup.css" type="text/css" />
+
+
+	
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script src="js/highcharts.js"></script>
+<script src="js/highcharts-3d.js"></script>
+<script src="js/exporting.js"></script>
+		<script type="text/javascript" charset="utf-8">
+
+
+function init(){
+  var ws = new WebSocket('wss://127.0.0.1:1347');
+  ws.onopen = function(evt) { onload(evt) };
+
+  ws.onmessage = function(ev) {
+    document.getElementById('plotbars').innerHTML = "";	
+    var array=[];	
+    array = $.parseJSON(ev.data); 
+    var values = $.map(array, function(v) { return parseFloat(v); });
+
+    var chart = new Highcharts.Chart({
+        chart: {
+            renderTo: 'plotbars',
+            type: 'column',
+            options3d: {
+                enabled: true,
+                alpha: 15,
+                beta: 15,
+                depth: 50,
+                viewDistance: 25
+            }
+        },
+        title: {
+            text: 'Compound bar plot'
+        },
+        subtitle: {
+            text: 'cool bar plot'
+        },
+        plotOptions: {
+            column: {
+                depth: 25
+            }
+        },
+        series: [{
+            data: values
+        }]
+    });
+
+    function showValues() {
+        $('#alpha-value').html(chart.options.chart.options3d.alpha);
+        $('#beta-value').html(chart.options.chart.options3d.beta);
+        $('#depth-value').html(chart.options.chart.options3d.depth);
+    }
+
+
+    // Activate the sliders
+    $('#sliders input').on('input change', function () {
+        chart.options.chart.options3d[this.id] = this.value;
+        showValues();
+        chart.redraw(false);
+    });
+
+    showValues();
+
+  }
+
+
+   window.onload = function() {
+
+
+    document.getElementById('sendinfo2').onclick = function(ev) {
+ 	var objs = new Object();
+   	objs.action = "compound";
+   	objs.value = document.getElementById('value').value;
+   	objs.years = document.getElementById('years').value;
+   	objs.percent = document.getElementById('percent').value;
+ 	var jsoninput= JSON.stringify(objs);
+      	ws.send(jsoninput);
+    };
+  };
+
+
+  ws.onclose = function(){
+        //try to reconnect in 5 seconds
+        setTimeout(function(){ init(); }, 5000);
+  };
+}
+
+
+ init();
+
+</script>
+
+
+
+  </head>
+
+
+
+
+  <body>
+  <!-- container section start -->
+  <section id="container" class="">
+     
+      
+      <header class="header dark-bg">
+
+            <!--logo start-->
+            <a href="index.html" class="logo">OPTIONS<span class="lite">CAT</span></a>
+            <!--logo end-->
+
+            <div class="nav search-row" id="top_menu">
+                <!--  search form start -->
+                <ul class="nav top-menu">                    
+              
+                </ul>
+                <!--  search form end -->                
+            </div>
+
+            <div class="top-nav notification-row">                
+                <!-- notificatoin dropdown start-->
+                <ul class="nav pull-right top-menu">
+                    
+                    <!-- task notificatoin start -->
+                                     <li>
+                        <form class="navbar-form">
+                            <input class="form-control" placeholder="Search" type="text">
+                        </form>
+                    </li>      
+
+                </ul>
+                <!-- notificatoin dropdown end-->
+            </div>
+      </header>      
+      <!--header end-->
+
+      <!--sidebar start-->
+      <aside>
+          <div id="sidebar"  class="nav-collapse ">
+              <!-- sidebar menu start-->
+
+              <ul class="sidebar-menu">                
+<img src="img/optionscat.png" height="130" width="180">
+                  <li class="sub-menu">
+                      <a class="" href="index.html">
+                          <img src="img/financial-analysis-icon.png" height="25" width="25">
+                          <span>Black-Scholes</span>
+                      </a>
+                  </li>	
+
+                  <li class="active">
+                      <a href="javascript:;" class="">
+                            <img src="img/profit-growth-icon.png" height="50" width="50">
+                          <span>Compound interest</span>
+                      </a>
+                  </li>
+               
+                  
+              </ul>
+
+              <!-- sidebar menu end-->
+          </div>
+      </aside>
+
+      <!--sidebar end-->
+      
+      <!--main content start-->
+      <section id="main-content">
+          <section class="wrapper">            
+              <!--overview start-->
+
+              
+
+         
+
+                    
+                   
+                <!-- statics end -->
+              
+            
+				
+
+              <!-- project team & activity start -->
+          <div class="row">
+            <div class="col-md-2 portlets">
+              <!-- Widget -->
+              <div class="panel panel-default">
+				<div class="panel-heading">
+                  <div class="pull-left">Compound interest</div>
+                  <div class="widget-icons pull-right">
+                  </div>  
+                  <div class="clearfix"></div>
+                </div>
+
+                <div class="panel-body">
+
+                                
+                                          <div class="form-group">
+                                            <label class="control-label col-lg-4" for="title">Value:</label>
+                                            <div class="col-lg-7"> 
+                                              <input type="text" class="form-control" id="value" value="20000">
+                                            </div>
+                                          </div>   
+					  <br><br>
+					
+                                          <div class="form-group">
+                                            <label class="control-label col-lg-4" for="title">Years:</label>
+                                            <div class="col-lg-7"> 
+                                              <input type="text" class="form-control" id="years" value="5">
+                                            </div>
+                                          </div>   
+					  <br><br>	
+                                          <div class="form-group">
+                                            <label class="control-label col-lg-4" for="content">Percent:</label>
+                                            <div class="col-lg-7">
+                                              <input type="text" class="form-control" id="percent" value="15">
+                                            </div>
+                                          </div>                          
+
+					<br><br>
+					<p align="center">
+                        		<button class="btn btn-info" id="sendinfo2">Send</button>
+					</p>
+                      		
+                  </div>
+                </div>
+                </div> 
+
+
+
+                   <div class="col-md-10 portlets">
+              <!-- Widget -->
+              <div class="panel panel-default">
+				<div class="panel-heading">
+                  <div class="pull-left">Result</div>
+                  <div class="widget-icons pull-right">
+                  </div>  
+                  <div class="clearfix"></div>
+                </div>
+
+                <div class="panel-body">
+                  <!-- Widget content -->
+		
+<div id="plotbars"></div>
+<center>
+<div id="sliders">
+    <table>
+        <tr>
+        	<td>Alpha Angle</td>
+        	<td><input id="alpha" type="range" min="0" max="45" value="15"/> <span id="alpha-value" class="value"></span></td>
+        </tr>
+        <tr>
+        	<td>Beta Angle</td>
+        	<td><input id="beta" type="range" min="-45" max="45" value="15"/> <span id="beta-value" class="value"></span></td>
+        </tr>
+        <tr>
+        	<td>Depth</td>
+        	<td><input id="depth" type="range" min="20" max="100" value="50"/> <span id="depth-value" class="value"></span></td>
+        </tr>
+    </table>
+</div>
+</center>
+
+
+         
+		
+                                              
+
+
+
+
+
+                </div>
+                </div>
+                </div> 
+
+
+
+            </div>
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+              </div>
+		
+                  <div class="widget-foot">
+                    <!-- Footer goes here -->
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+                        
+          </div> 
+              <!-- project team & activity end -->
+
+          </section>
+      </section>
+      <!--main content end-->
+  </section>
+  <!-- container section start -->
+
+
+
+   
+
+
+  </body>
+</html>

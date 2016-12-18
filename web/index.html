@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Options Cat v 0.1">
+    <meta name="author" content="Coolervoid Labs">
+    <link rel="shortcut icon" href="img/favicon.png">
+
+    <title>Options Cat v 0.1</title>
+	
+
+
+    <!-- Bootstrap CSS -->    
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- bootstrap theme -->
+    <link href="css/bootstrap-theme.css" rel="stylesheet">
+    <!--external css-->
+    <!-- font icon -->
+    <link href="css/elegant-icons-style.css" rel="stylesheet" />
+    <link href="css/font-awesome.min.css" rel="stylesheet" />    
+
+
+
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+      <script src="js/lte-ie7.js"></script>
+    <![endif]-->
+<link rel="stylesheet" href="css/pickmeup.css" type="text/css" />
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="js/jquery.pickmeup.js"></script>
+
+		<style type="text/css" title="currentStyle">
+			@import "media/css/demo_page.css";
+			@import "media/css/demo_table.css";
+                       @import "media/theme/ui-darkness/jquery-ui-1.8.23.custom.css";
+		</style>
+<script type="text/javascript" src="js/demo.js"></script>
+		<script type="text/javascript" language="javascript" src="media/js/jquery.js"></script>
+		<script type="text/javascript" language="javascript" src="media/js/jquery.dataTables.js"></script>
+		<script type="text/javascript" charset="utf-8">
+
+
+			$(document).ready(function() {
+				var oTable = $('#blackscholes').dataTable( {
+                                         "bJQueryUI": true,
+					"bProcessing": true,
+					 "sDom": 'lfrtip'
+                             
+				} );
+			} );
+
+			$(document).ready(function() {
+				var oTable = $('#tablemonth').dataTable( {
+                                         "bJQueryUI": true,
+					"bProcessing": true,
+					 "sDom": 'lfrtip',
+					"bFilter": false, 
+					"bPaginate": false,"bInfo": false,
+                             
+				} );
+			} );
+
+
+function init(){
+  var ws = new WebSocket('wss://127.0.0.1:1347');
+  ws.onopen = function(evt) { onload(evt) };
+
+  ws.onmessage = function(ev) {	
+
+	var oTable2 = $('#blackscholes').dataTable();
+	var arr = [];
+
+	var test=ev.data;
+	var str=test.replace(/[^a-z0-9,.\":}{]/ig, '');
+	console.log(str);
+	var parsed = JSON.parse(str);
+	var arr = [];
+
+	for(var x in parsed){
+  		arr.push(parsed[x]);
+	}
+
+    	oTable2.fnAddData(arr);
+
+  }
+
+
+   window.onload = function() {
+
+
+    document.getElementById('sendinfo').onclick = function(ev) {
+ 	var obj = new Object();
+   	obj.action = "blackscholes";
+   	obj.name = document.getElementById('Name').value;
+   	obj.strike = document.getElementById('Strike').value;
+   	obj.under = document.getElementById('Under').value;
+   	obj.risk = document.getElementById('Risk').value;
+   	obj.volatility = document.getElementById('Volatility').value;
+   	obj.maturity = document.getElementById('Maturity').value;
+   	obj.type = document.getElementById('Type').value;
+ 	var jsoninput= JSON.stringify(obj);
+      	ws.send(jsoninput);
+    };
+  };
+
+
+  ws.onclose = function(){
+        //try to reconnect in 5 seconds
+        setTimeout(function(){ init(); }, 5000);
+  };
+}
+
+ init();
+
+
+</script>
+
+
+
+  </head>
+
+
+
+
+  <body>
+  <!-- container section start -->
+  <section id="container" class="">
+     
+      
+      <header class="header dark-bg">
+
+            <!--logo start-->
+            <a href="index.html" class="logo">OPTIONS<span class="lite">CAT</span></a>
+            <!--logo end-->
+
+            <div class="nav search-row" id="top_menu">
+                <!--  search form start -->
+                <ul class="nav top-menu">                    
+              
+                </ul>
+                <!--  search form end -->                
+            </div>
+
+            <div class="top-nav notification-row">                
+                <!-- notificatoin dropdown start-->
+                <ul class="nav pull-right top-menu">
+                    
+                    <!-- task notificatoin start -->
+                                     <li>
+                        <form class="navbar-form">
+                            <input class="form-control" placeholder="Search" type="text">
+                        </form>
+                    </li>      
+
+                </ul>
+                <!-- notificatoin dropdown end-->
+            </div>
+      </header>      
+      <!--header end-->
+
+      <!--sidebar start-->
+      <aside>
+          <div id="sidebar"  class="nav-collapse ">
+              <!-- sidebar menu start-->
+
+              <ul class="sidebar-menu">                
+<img src="img/optionscat.png" height="130" width="180">
+                  <li class="active">
+                      <a class="" href="index.html">
+                          <img src="img/financial-analysis-icon.png" height="50" width="50">
+                          <span>Black-Scholes</span>
+                      </a>
+                  </li>	
+
+                  <li class="sub-menu">
+                      <a href="compound.html" class="">
+                            <img src="img/profit-growth-icon.png" height="25" width="25">
+                          <span>Compound interest</span>
+                      </a>
+                  </li>
+               
+                  
+              </ul>
+
+              <!-- sidebar menu end-->
+          </div>
+      </aside>
+
+      <!--sidebar end-->
+      
+      <!--main content start-->
+      <section id="main-content">
+          <section class="wrapper">            
+              <!--overview start-->
+
+              
+
+         
+
+                    
+                   
+                <!-- statics end -->
+              
+            
+				
+
+              <!-- project team & activity start -->
+          <div class="row">
+            <div class="col-md-2 portlets">
+              <!-- Widget -->
+              <div class="panel panel-default">
+				<div class="panel-heading">
+                  <div class="pull-left">Black-Scholes config</div>
+                  <div class="widget-icons pull-right">
+                  </div>  
+                  <div class="clearfix"></div>
+                </div>
+
+                <div class="panel-body">
+
+                                
+                                          <div class="form-group">
+                                            <label class="control-label col-lg-4" for="title">Name:</label>
+                                            <div class="col-lg-7"> 
+                                              <input type="text" class="form-control" id="Name" value="gool2B">
+                                            </div>
+                                          </div>   
+					  <br><br><br>
+					
+                                          <div class="form-group">
+                                            <label class="control-label col-lg-4" for="title">Strike:</label>
+                                            <div class="col-lg-7"> 
+                                              <input type="text" class="form-control" id="Strike" value="100">
+                                            </div>
+                                          </div>   
+					  <br><br>	
+                                          <div class="form-group">
+                                            <label class="control-label col-lg-4" for="content">Under:</label>
+                                            <div class="col-lg-7">
+                                              <input type="text" class="form-control" id="Under" value="96">
+                                            </div>
+                                          </div>                           
+					  <br><br>
+                                          <div class="form-group">
+                                            <label class="control-label col-lg-4" for="tags">Risk-Free Rate:</label>
+                                            <div class="col-lg-7">
+                                              <input type="text" class="form-control" id="Risk" value="0.2">
+                                            </div>
+                                          </div>
+					  <br><br><br>	
+                                          <div class="form-group">
+                                            <label class="control-label col-lg-4" for="tags">Volatility:</label>
+                                            <div class="col-lg-4">
+                                              <input type="text" class="form-control" id="Volatility" value="0.5">
+                                            </div>
+                                          </div>
+					  <br><br>
+                                          <div class="form-group">
+                                            <label class="control-label col-lg-4" for="tags">Maturity:</label>
+                                            <div class="col-lg-4">
+                                              <input type="text" class="form-control" id="Maturity" value="2">
+                                            </div>
+                                          </div>
+                                         <br><br> <label class="control-label col-lg-4" for="tags">Type:  </label>
+                                          <select class="control-label col-lg-6" id="Type">
+                                              <option>CALL</option>
+                                              <option>PUT</option>
+                                          </select><br><br><br>
+					<p align="center">
+                        		<button class="btn btn-info" id="sendinfo">Send</button>
+					</p>
+                      		
+                  </div>
+                </div>
+                </div> 
+
+
+
+                   <div class="col-md-8 portlets">
+              <!-- Widget -->
+              <div class="panel panel-default">
+				<div class="panel-heading">
+                  <div class="pull-left">Greek tables</div>
+                  <div class="widget-icons pull-right">
+                  </div>  
+                  <div class="clearfix"></div>
+                </div>
+
+                <div class="panel-body" >
+                  <!-- Widget content -->
+		
+                <table cellpadding="0" cellspacing="1" border="0" class="display" id="blackscholes" width="100%" >
+			<thead>
+				<tr>
+					<th width="3%">Name</th>
+					<th width="3%">Type</th>
+					<th width="15%">Premium</th>
+					<th width="15%">Breakeven</th>
+					<th width="3%">Strike</th>
+					<th width="15%">Delta</th>
+					<th width="15%">Gamma</th>
+					<th width="15%">Vega</th>
+					<th width="15%">Theta</th>
+					<th width="15%">Rho</th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+			<tfoot>
+				<tr>
+					<th>Name</th>
+					<th>Type</th>
+					<th>Premium</th>
+					<th>Breakeven</th>
+					<th>Strike</th>
+					<th>Delta</th>
+					<th>Gamma</th>
+					<th>Vega</th>
+					<th>Theta</th>
+					<th>Rho</th>
+				</tr>
+			</tfoot>
+		</table>
+		
+                                              
+
+
+
+
+
+                </div>
+                </div>
+                </div> 
+
+                   <div class="col-lg-2">
+              <!-- Widget -->
+              <div class="panel panel-default">
+				<div class="panel-heading">
+                  <div class="pull-left">Desktop</div>
+                  <div class="widget-icons pull-right">
+                  </div>  
+                  <div class="clearfix"></div>
+                </div>
+
+                <div class="panel-body">
+                  <!-- Widget content -->
+		<div class="single" data-pmu-format="Y-m-d" align="center"></div>
+		<br>
+                <table cellpadding="0" cellspacing="1" border="0" class="display" id="tablemonth" width="100%" >
+			<thead>
+				<tr>
+					<th width="50%">Month</th>
+					<th width="50%">CALL</th>
+					<th width="50%">PUT</th>
+				</tr>
+			</thead>
+			<tbody>
+
+  			<tr>
+    				<td>January</td>
+    				<td>A</td>
+    				<td>M</td>
+			</tr>
+			<tr>
+    				<td>February</td>
+    				<td>B</td>
+    				<td>N</td>
+			</tr>
+			<tr>
+    				<td>March</td>
+    				<td>C</td>
+    				<td>O</td>
+			</tr>
+			<tr>
+    				<td>April</td>
+    				<td>D</td>
+    				<td>P</td>
+  			</tr>	
+			<tr>
+    				<td>May</td>
+    				<td>E</td>
+    				<td>Q</td>
+  			</tr>	
+			<tr>
+    				<td>June</td>
+    				<td>F</td>
+    				<td>R</td>
+  			</tr>	
+			<tr>
+    				<td>July</td>
+    				<td>G</td>
+    				<td>S</td>
+  			</tr>	
+			<tr>
+    				<td>August</td>
+    				<td>H</td>
+    				<td>T</td>
+  			</tr>	
+			<tr>
+    				<td>September</td>
+    				<td>I</td>
+    				<td>U</td>
+  			</tr>	
+			<tr>
+    				<td>October</td>
+    				<td>J</td>
+    				<td>V</td>
+  			</tr>	
+			<tr>
+    				<td>November</td>
+    				<td>K</td>
+    				<td>W</td>
+  			</tr>	
+			<tr>
+    				<td>December</td>
+    				<td>L</td>
+    				<td>X</td>
+  			</tr>	
+			</tbody>
+			<tfoot>
+				<tr>
+					<th>Month</th>
+					<th>CALL</th>
+					<th>PUT</th>
+				</tr>
+			</tfoot>
+		</table>
+                </div>
+                </div>
+                </div> 
+
+            </div>
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+              </div>
+		
+                  <div class="widget-foot">
+                    <!-- Footer goes here -->
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+                        
+          </div> 
+              <!-- project team & activity end -->
+
+          </section>
+      </section>
+      <!--main content end-->
+  </section>
+  <!-- container section start -->
+
+
+
+   
+
+
+  </body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head profile="http://www.w3.org/2005/10/profile">
+<link rel="icon" 
+      type="image/png" 
+      href="img/kunai.png">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href=".img/favicon.ico">
+
+    <title>Warrior :: Edit Module ::</title>
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+     <link href="./css/mosca.css" rel="stylesheet">
+
+<script type="text/javascript" src="syntax/media/js/shCore.js"></script>
+<script type="text/javascript" src="syntax/media/js/shBrushXml.js"></script>
+<script type="text/javascript" src="syntax/media/js/shBrushCpp.js"></script>
+<script type="text/javascript" src="syntax/media/js/shBrushPhp.js"></script>
+<script type="text/javascript" src="syntax/media/js/shBrushRuby.js"></script>
+<script type="text/javascript" src="syntax/media/js/shBrushPython.js"></script>
+<script type="text/javascript" src="syntax/media/js/shBrushDelphi.js"></script>
+<script type="text/javascript" src="syntax/media/js/shBrushJava.js"></script>
+<script type="text/javascript" src="syntax/media/js/shBrushJScript.js"></script>
+<script type="text/javascript" src="syntax/media/js/shBrushBash.js"></script>
+<link type="text/css" rel="Stylesheet" href="syntax/media/css/shCoreRDark.css">
+<link type="text/css" rel="Stylesheet" href="syntax/media/css/shCore.css">
+
+
+<script language="javascript" type="text/javascript">
+  
+  var rooms = [];
+
+  var ws3 = new WebSocket('wss://127.0.0.1:1345');
+  ws3.onopen = function(evt) { onload(evt) };
+
+  window.onload = function() {
+
+  	ws3.onmessage = function(ev) {
+    		var div = document.createElement('div');
+    		div.innerHTML = ev.data;
+    		document.getElementById('messages3').appendChild(div);
+    		SyntaxHighlighter.highlight();
+//		var cmp=ev.data;
+//		cmp=cmp.localeCompare("close form6");
+//		if(cmp)
+  // 			ws3.close();
+
+
+
+	       document.getElementById('save').onclick = function(ev) {
+//		location.reload();
+//  		var ws4 = new WebSocket('wss://127.0.0.1:1345');
+  //		ws4.onopen = function(evt) { onload(evt) };
+ 	 	var obj = new Object();
+   	 	obj.action = "form6";
+   	 	obj.module = document.getElementById('egg').value;
+   	 	var obj2 = document.getElementById('text_module');
+		obj.text_module = obj2.value;
+   	 	obj.csrf_token = document.getElementById('csrf_token').value;
+ 	 	var jsoninput= JSON.stringify(obj);
+      	 	ws3.send(jsoninput);
+  //  		ws3.close();
+    	 	document.getElementById('row well').innerHTML = "<p>module saved</p>";
+       		};
+
+  	};
+
+       document.getElementById('open_edit').onclick = function(ev) {
+    	 	document.getElementById('messages3').innerHTML = "";
+ 	 	var obj = new Object();
+   	 	obj.action = "form5";
+   	 	obj.module = document.getElementById('egg').value;
+ 	 	var jsoninput= JSON.stringify(obj);
+      	 	ws3.send(jsoninput);
+       };
+
+
+
+
+
+
+  }
+</script>
+
+  </head>
+
+  <body>
+
+
+    <div class="container">
+    <div class="row">
+
+
+    <div id="row well" class="row well" style="height: 800px;">
+
+
+	Module: <select id="egg">
+  	<option value="eggs/c_common_failures.egg">C common fails</option>
+  	<option value="eggs/php_common_fail.egg">PHP common fails</option>
+  	<option value="eggs/csharp_common_fails.egg">C# common fails</option>
+  	<option value="eggs/java_common_fail.egg">Java common fails</option>
+  	<option value="eggs/ruby_common_fail.egg">Ruby common fails</option>
+  	<option value="eggs/javascript_common_fail.egg">javascript common fails</option>
+  	<option value="eggs/asp_common_fails.egg">ASP common fails</option>
+	</select > 
+	<button id="open_edit">open to edit</button><br>
+
+    <div id="messages3">
+    </div>
+</div>
+
+
+      
+</div>
+
+    <script>window.jQuery || document.write('<script src="./js/jquery.min.js"><\/script>')</script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/mosca.js"></script>
+<script>
+  
+
+
+ 
+</script>
+  </body>
+</html>
