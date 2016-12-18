@@ -52,7 +52,7 @@ $ fuser -k -n tcp 1347
 
 # At the future
 
-* Remote CSV download of google finance and yahoo fianance
+* Remote CSV download of google finance and yahoo finance
 * Options to digest CSV to black scholes table
 * CRUD to trade risk manager
 * Plot Gain and loss of all trades
