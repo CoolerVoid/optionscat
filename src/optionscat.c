@@ -72,7 +72,9 @@ static void broadcast(struct mg_connection *nc, const struct mg_str msg)
 
   					double S=0,K=0,r=0,v=0,T=0;
 
-//TODO validate input here...
+// validate length of input here...
+					if(validate_bs(strike,volatility,under,risk,maturity)==false)					
+						goto FREE_scholes;
 
 					blackscholes=0;	
 // convert string to double...
@@ -91,6 +93,7 @@ T= One year until expiry
 */
 					create_greek_table(c,name,type,S,K,r,v,T);
 
+					FREE_scholes:
 					XFREE(strike);
 					XFREE(name);
 					XFREE(under);	
@@ -105,12 +108,18 @@ T= One year until expiry
 
 					double v=0,y=0,p=0;
 
+					
+					if(validate_compound(value,years,percent)==false)					
+						goto FREE_compound;
+
+
 					v=atof(value);
 					y=atof(years);
 					p=atof(percent);
 // TODO need validate this
 					calc_compound_interest(c,v,p,y);				
-	
+
+					FREE_compound:	
 					XFREE(value);
 					XFREE(years);
 					XFREE(percent);
