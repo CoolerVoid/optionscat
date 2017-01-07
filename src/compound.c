@@ -14,7 +14,7 @@ void calc_compound_interest(struct mg_connection *c,double principle, double rat
 
 // TODO improve this limit, to return debug error..
 
-	if(times > 50 || times < 2 || times == 0)
+	if(times > 50 || times < 2)
 	{
 		DEBUG("error at limit");
 		times=5;
