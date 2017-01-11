@@ -77,11 +77,11 @@ static void broadcast(struct mg_connection *nc, const struct mg_str msg)
 
 					blackscholes=0;	
 // convert string to double...
-					K=atof(strike);	
-					v=atof(volatility);		
-					S=atof(under);		
-					r=atof(risk);		
-					T=atof(maturity);		
+					K=strtod(strike,(char **)NULL);	
+					v=strtod(volatility,(char **)NULL);		
+					S=strtod(under,(char **)NULL);		
+					r=strtod(risk,(char **)NULL);		
+					T=strtod(maturity,(char **)NULL);		
 							
 /* Note is for European Vanilla options
 S= Option price
@@ -112,9 +112,9 @@ T= One year until expiry
 						goto FREE_compound;
 
 
-					v=atof(value);
-					y=atof(years);
-					p=atof(percent);
+					v=strtod(value,(char **)NULL);
+					y=strtod(years,(char **)NULL);
+					p=strtod(percent,(char **)NULL);
 // TODO need validate this
 					calc_compound_interest(c,v,p,y);				
 
