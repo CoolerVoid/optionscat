@@ -16,7 +16,7 @@ bool whitelist_ip(char * addr)
 	}
 
 	char line[128];
-	memset(line,0,127);
+	memset(line,0,128);
 
 	while( fgets(line,sizeof line,arq) && at_list==false )
 	{

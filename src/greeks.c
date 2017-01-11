@@ -367,7 +367,7 @@ void create_greek_table(struct mg_connection *c,char *name,char *type,double S, 
 // TODO study Speed, Zomma, Color, Ultima... https://en.wikipedia.org/wiki/Greeks_%28finance%29#Third-order_Greeks WTF oh GOD	
 		breakeven=K+call;  
 	
-  		memset(type_call,0,1023);
+  		memset(type_call,0,1024);
 
   		snprintf(type_call,1024,"{\"name\":\"%s\",\"type\":\"%s\",\"premium\":\"%f\",\"breakeven\":\"%f\",\"strike\":\"%f\",\"delta\":\"%f\",\"gamma\":\"%f\",\"vega\":\"%f\",\"theta\":\"%f\",\"rho\":\"%f\"}",name,"CALL",call,breakeven,K,call_delta_v,call_gamma_v,call_vega_v,call_theta_v,call_rho_v); 
 
@@ -385,7 +385,7 @@ void create_greek_table(struct mg_connection *c,char *name,char *type,double S, 
 
 		breakeven=K-put; 
 
-  		memset(type_put,0,1023);
+  		memset(type_put,0,1024);
 
 		snprintf(type_put,1024,"{\"name\": \"%s\",\"type\":\"%s\",\"premium\": \"%f\",\"breakeven\":\"%f\",\"strike\": \"%f\",\"delta\": \"%f\",\"gamma\": \"%f\",\"vega\": \"%f\",\"theta\": \"%f\",\"rho\": \"%f\"}",name,"PUT",put,breakeven,K,put_delta_v,put_gamma_v,put_vega_v,put_theta_v,put_rho_v); 	
 		mg_send_websocket_frame(c, WEBSOCKET_OP_TEXT, type_put, 1024);

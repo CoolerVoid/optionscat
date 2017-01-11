@@ -24,8 +24,8 @@ void calc_compound_interest(struct mg_connection *c,double principle, double rat
 
 		while(times)
 		{	 
-			memset(tmp,0,20);
-			tmp[20]='\0';	
+			memset(tmp,0,21);
+			
     			amount = principle*pow(1+(rate/100),times); 
 			fpeRaised=fetestexcept(FE_INVALID | FE_DIVBYZERO |FE_OVERFLOW | FE_UNDERFLOW | FE_INEXACT);
 

@@ -40,8 +40,7 @@ static void broadcast(struct mg_connection *nc, const struct mg_str msg)
   char buf[4048];
   char *action, *strike, *name, *volatility, *under, *risk, *maturity, *type, *csrf_token, *value, *years, *percent;
 
-	memset(buf,0,4047);
-	buf[4047]='\0';
+	memset(buf,0,4048);
 	
 	if(msg.len>4047)
 		return;
