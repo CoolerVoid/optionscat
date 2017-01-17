@@ -34,6 +34,7 @@ void calc_compound_interest(struct mg_connection *c,double principle, double rat
 				DEBUG("error here!");
    				perror("Log: \n");
     				XFREE(json_interest);
+  				fpeRaised=feclearexcept(FE_ALL_EXCEPT);
 				return;
 			}
 
