@@ -1,14 +1,14 @@
 CC=gcc
 CFLAGS=-Wall -Wextra -Wno-unknown-pragmas -O2 
-DFLAGS=-DMG_ENABLE_SSL -DMG_DISABLE_PFS lib/krypton/krypton.c lib/libmongoose/mongoose.c lib/BSD/strsec.c lib/frozen/frozen.c -llib/krypton
+DFLAGS=-DMG_ENABLE_SSL -DMG_DISABLE_PFS lib/libmongoose/mongoose.c lib/BSD/strsec.c lib/frozen/frozen.c 
 DIR=src/
 DIROUT=bin/
 UNAME_S := $(shell uname -s)
-ifeq ($(UNAME_S),Darwin)
-	LDFLAGS=-lpthread 
-else
-	LDFLAGS=-Wl,-z,relro,-z,now -lpthread -lm 
-endif
+#ifeq ($(UNAME_S),Darwin)
+LDFLAGS=-lpthread -lcrypto -lssl -lm 
+#else
+#	LDFLAGS=-Wl,-z,relro,-z,now -lpthread -lm -lcrypto -lssl
+#endif
 
 optionscat: $(DIR)optionscat.c 
 	@echo "Compile... "

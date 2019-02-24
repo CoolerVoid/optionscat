@@ -15,14 +15,8 @@
 #include "compound.h"
 
 
-static sig_atomic_t s_signal_received = 0;
 static struct mg_serve_http_opts s_http_server_opts;
 
-static void signal_handler(int sig_num) 
-{
-  signal(sig_num, signal_handler);  
-  s_signal_received = sig_num;
-}
 
 static int is_websocket(const struct mg_connection *nc) 
 {
@@ -178,40 +172,49 @@ static void ev_handler(struct mg_connection *nc, int ev, void *ev_data)
   	}
 }
 	
+
+
+
+
+const char *s_ssl_cert = "cert/certkey.pem";
+const char *s_ssl_key = "cert/certkey.key";
+const char *port = "1345"; //port to open
+	
 int main()
 {
-	char port[]="1347";
 	struct mg_mgr mgr;
 	struct mg_connection *nc;
+  	struct mg_bind_opts bind_opts;
+  	const char *err;
 
-	signal(SIGTERM, signal_handler);
-	signal(SIGINT, signal_handler);
-	setvbuf(stdout, NULL, _IOLBF, 0);
-	setvbuf(stderr, NULL, _IOLBF, 0);
+ 	mg_mgr_init(&mgr, NULL);
+	memset(&bind_opts, 0, sizeof(bind_opts));
+  	bind_opts.ssl_cert = s_ssl_cert;
+  	bind_opts.ssl_key = s_ssl_key;
+  	bind_opts.error_string = &err;
 
-	mg_mgr_init(&mgr, NULL);
+  	printf("Starting SSL server on port %s, cert from %s, key from %s\n",
+         port, bind_opts.ssl_cert, bind_opts.ssl_key);
+  	nc = mg_bind_opt(&mgr, port, ev_handler, bind_opts);
 
-	nc = mg_bind(&mgr, port, ev_handler);
+  	if (nc == NULL) 
+	{
+    		DEBUG("Failed to create listener: %s\n", err);
+    		return 1;
+  	}
+
 	mg_set_protocol_http_websocket(nc);
-/* if run with TLS... 
- * cert+pem both in pem file
- * */ 
-  	const char *err_str = mg_set_ssl(nc, "cert/certkey.pem", NULL);
-
-    		if (err_str != NULL) 
-		{
-      			fprintf(stderr, "Error loading SSL cert: %s\n", err_str);
-      			exit(1);
-    		}
 
   	s_http_server_opts.document_root = "web/";
   	s_http_server_opts.dav_document_root = "web/";  // Allow access via WebDav
   	s_http_server_opts.enable_directory_listing = "no";
 
-  	fprintf(stdout,"OPTIONSCAT v0.01 server\n started on port %s\n", port);
+  	fprintf(stdout,"OptionsCat \nserver started at port %s\nOpen your browser in https://127.0.0.1:%s\n", port,port);
 
-  		while (s_signal_received == 0) 
-  			mg_mgr_poll(&mgr, 2000);
+
+  	for (;;) 
+    		mg_mgr_poll(&mgr, 1000);
+  	
   
   	mg_mgr_free(&mgr);
 

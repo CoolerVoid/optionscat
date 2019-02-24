@@ -37,15 +37,15 @@ $ bin/optionscat     (NOTE: note use cd bin; ./optionscat need real path)
 
 Enter in your browser at:
 
-https://127.0.0.1:1347
+https://127.0.0.1:1345
 
 Only address 127.0.0.1 can view the program.
 
 # NOTEs 
 
-1- At second execution if return error, you need kill old process at port 1347:
+1- At second execution if return error, you need kill old process at port 1345:
 
-$ fuser -k -n tcp 1347
+$ fuser -k -n tcp 1345
 
 2- If you want use at network, Whitelist to access server you can edit at "config/whitelist.conf"
 
