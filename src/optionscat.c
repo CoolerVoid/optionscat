@@ -177,7 +177,7 @@ static void ev_handler(struct mg_connection *nc, int ev, void *ev_data)
 
 
 const char *s_ssl_cert = "cert/certkey.pem";
-const char *s_ssl_key = "cert/certkey.key";
+const char *s_ssl_key = "cert/privateKey.key";
 const char *port = "1345"; //port to open
 	
 int main()
