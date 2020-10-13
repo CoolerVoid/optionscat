@@ -3,12 +3,9 @@
 
 static void *xmalloc_fatal(size_t size) 
 {
-	if ( size == 0 ) 
-		return NULL;
+	DEBUG("\n Memory FAILURE...\n dbg size: %lu",size);
 
-	DEBUG("\n Memory FAILURE...\n");
-
-	exit(1);
+	exit(0);
 }
 
 void *xmalloc (size_t size) 
