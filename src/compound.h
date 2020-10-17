@@ -1,3 +1,6 @@
+#ifndef __COMPOND_H__
+#define __COMPOND_H__
+
 #include <stdio.h>
 #include <time.h>
 #include <math.h>
@@ -10,3 +13,5 @@
 #pragma STDC FENV_ACCESS ON
 // return json with compound interest of years
 void calc_compound_interest(struct mg_connection *c,double principle, double rate, double time); 
+
+#endif

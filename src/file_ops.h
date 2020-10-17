@@ -1,3 +1,6 @@
+#ifndef __FILE_OPS_H__
+#define __FILE_OPS_H__
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -18,3 +21,6 @@
 char *file_content(const char * filename); 
 char *ReadLines(char * NameFile);
 void Write_File(char *file,char *str);
+
+#endif
+

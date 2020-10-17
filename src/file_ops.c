@@ -85,7 +85,7 @@ char *ReadLines(char * NameFile)
 	if( fclose(fh) == EOF )
 	{
 		DEBUG("Error in close() file %s",NameFile);
-		exit(1);
+		exit(0);
 	}
 
 	fh=NULL;
@@ -108,7 +108,7 @@ void Write_File(char *file,char *str)
 	{
 //		fclose(arq);
 		DEBUG("error in WriteFile() %s",file); 
-		exit(1);
+		exit(0);
 	}
 
 	fprintf(arq,"%s",str); 
@@ -116,7 +116,7 @@ void Write_File(char *file,char *str)
 	if( fclose(arq) == EOF )
 	{
 		DEBUG("error in Write() file %s",file);
-		exit(1);
+		exit(0);
 	}
 	arq=NULL;
 }

@@ -1,3 +1,6 @@
+#ifndef __VALIDATE_H__
+#define __VALIDATE_H__
+
 #include <stdio.h>
 #include <string.h>
 #include <sys/types.h>
@@ -10,3 +13,6 @@
 
 bool validate_bs(char *strike, char *volatility, char *under, char *risk, char *maturity);
 bool validate_compound(char *value,char *years,char *percent);
+
+#endif
+

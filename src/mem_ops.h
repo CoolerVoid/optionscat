@@ -1,3 +1,6 @@
+#ifndef __MEM_OPS_H__
+#define __MEM_OPS_H__
+
 #include <stdio.h>	
 #include <sys/types.h>
 #include <string.h>		
@@ -24,3 +27,5 @@ void *xmalloc (size_t size);
 void *xcalloc (size_t mem, size_t size);
 void *xrealloc (void *ptr, size_t size);
 void xfree(void **ptr);
+
+#endif

@@ -1,3 +1,6 @@
+#ifndef __GREEKS_H__
+#define __GREEKS_H__
+
 #include <stdio.h>
 #include <math.h>
 #include <fenv.h>
@@ -62,3 +65,6 @@ void create_greek_table(struct mg_connection *c,char *name,char *type, double S,
 
 
 //TODO add Asian, american options here...
+
+#endif
+
