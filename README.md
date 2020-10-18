@@ -30,7 +30,7 @@ $ cd optionscat
 $ make
 ```
 
-Now before execute server need create cert to use TLS:
+Now before execute server need create cert(or use your custom CERT here) to use TLS:
 ```
 $ cd cert; openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -keyout privateKey.key -out certificate.crt
 
