@@ -1,14 +1,18 @@
 # optionscat
 
 ![alt tag](https://github.com/CoolerVoid/optionscat/blob/master/doc/optionscat.png)
-European options tool, compound calc, finance manager for traders... 
+European options tool and compound calc.
+
+OptionsCat is open source tool to make Black & Scholes for stock market options, compound calc with 3D ploting, the code is made in C language uses lib mongoose and OpenSSL. Runs well on x32/x64, but the mindset of project is to run on embedded systems(ARM, MIPS).
 
 The Black-Scholes model for calculating the premium of an option was introduced in 1973 in a paper entitled, "The Pricing of Options and Corporate Liabilities" published in the Journal of Political Economy. The formula, developed by three economists – Fischer Black, Myron Scholes and Robert Merton – is perhaps the world's most well-known options pricing model. Black passed away two years before Scholes and Merton were awarded the 1997 Nobel Prize in Economics for their work in finding a new method to determine the value of derivatives (the Nobel Prize is not given posthumously; however, the Nobel committee acknowledged Black's role in the Black-Scholes model).
 
 Read more: Options Pricing: Black-Scholes Model| 
 Investopedia http://www.investopedia.com/university/options-pricing/black-scholes-model.asp#ixzz4T9rfuUyJ
 
-
+Video demo:
+--
+https://www.youtube.com/watch?v=KxLdnPC3c9g
 
 
 # Screenshot
