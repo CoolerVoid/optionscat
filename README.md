@@ -22,15 +22,16 @@ https://www.youtube.com/watch?v=KxLdnPC3c9g
 # Install
 
 I tested this project in MacOs and Fedora Linux with Firefox browser, to install follow this steps at unix terminal:
-
+```
 $ git clone https://github.com/CoolerVoid/optionscat/
 
 $ cd optionscat
 
 $ make
+```
 
 Now before execute server need create cert to use TLS:
-
+```
 $ cd cert; openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -keyout privateKey.key -out certificate.crt
 
 $ cat certificate.crt privateKey.key > certkey.pem
@@ -38,6 +39,7 @@ $ cat certificate.crt privateKey.key > certkey.pem
 $ cd ..
 
 $ bin/optionscat     (NOTE: note use cd bin; ./optionscat need real path)
+```
 
 Enter in your browser at:
 
@@ -48,13 +50,13 @@ Only address 127.0.0.1 can view the program.
 # NOTEs 
 
 1- At second execution if return error, you need kill old process at port 1345:
-
+```
 $ fuser -k -n tcp 1345
-
+```
 2- If you want use at network, Whitelist to access server you can edit at "config/whitelist.conf"
 
 
-# At the future
+# TODO
 
 * Remote CSV download of google finance and yahoo finance
 * Options to digest CSV to black scholes table
