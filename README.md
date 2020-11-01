@@ -47,6 +47,8 @@ https://127.0.0.1:1345
 
 Only address 127.0.0.1 can view the program.
 
+Tested with google chrome.
+
 # NOTEs 
 
 1- At second execution if return error, you need kill old process at port 1345:

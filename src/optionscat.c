@@ -8,9 +8,9 @@
 #include "greeks.h"   // calculate European vanilla options
 #include "html_entities.h" // o make XSS mitigation
 #include "mem_ops.h" // xmalloc() ,XFREE()...
-#include "../lib/BSD/strsec.h" // strlcpy(), strlcat() and strnstr()
-#include "../lib/frozen/frozen.h" // json parser
-#include "../lib/libmongoose/mongoose.h" // HTTPd lib + krypton
+#include "BSD/strsec.h" // strlcpy(), strlcat() and strnstr()
+#include "frozen/frozen.h" // json parser
+#include "libmongoose/mongoose.h" // HTTPd lib + krypton
 #include "whitelist.h" // list os whitelist to access this server, file  "conf/whitelist.conf"
 #include "compound.h"
 

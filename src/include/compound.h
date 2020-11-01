@@ -5,7 +5,7 @@
 #include <time.h>
 #include <math.h>
 #include <stdlib.h>
-#include "../lib/libmongoose/mongoose.h"
+#include "libmongoose/mongoose.h"
 #include "mem_ops.h"
 #include <fenv.h>
 #include <errno.h>

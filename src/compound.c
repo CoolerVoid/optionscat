@@ -1,6 +1,6 @@
 #include "compound.h"
-#include "../lib/libmongoose/mongoose.h"
-#include "../lib/BSD/strsec.h"
+#include "libmongoose/mongoose.h"
+#include "BSD/strsec.h"
 
 // return json with compound interest of years
 void calc_compound_interest(struct mg_connection *c,double principle, double rate, double times) 

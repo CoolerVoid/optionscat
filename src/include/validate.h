@@ -8,7 +8,7 @@
 #include <unistd.h>
 #include <stdbool.h>
 #include <errno.h>
-#include "../lib/BSD/strsec.h"
+#include "BSD/strsec.h"
 #include "mem_ops.h"
 
 bool validate_bs(char *strike, char *volatility, char *under, char *risk, char *maturity);

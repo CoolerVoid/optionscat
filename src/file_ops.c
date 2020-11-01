@@ -1,8 +1,8 @@
 #include "file_ops.h"
 #include "mem_ops.h"
-#include "../lib/libmongoose/mongoose.h"
+#include "libmongoose/mongoose.h"
 #include "html_entities.h"
-#include "../lib/BSD/strsec.h"
+#include "BSD/strsec.h"
 #include "validate.h"
 #define MAX_file_len 1000000
 

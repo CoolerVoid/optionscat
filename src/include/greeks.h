@@ -6,7 +6,7 @@
 #include <fenv.h>
 #include <errno.h>
 #include <stdlib.h>
-#include "../lib/libmongoose/mongoose.h"
+#include "libmongoose/mongoose.h"
 #include "mem_ops.h"
 #define _USE_MATH_DEFINES
 

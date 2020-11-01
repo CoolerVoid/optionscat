@@ -1,8 +1,8 @@
 // NOTE: this way is for European vanilla options
 #include "greeks.h"
-#include "../lib/libmongoose/mongoose.h"
+#include "libmongoose/mongoose.h"
 #include "html_entities.h"
-#include "../lib/BSD/strsec.h"
+#include "BSD/strsec.h"
 
 // normal probability density function https://en.wikipedia.org/wiki/Probability_density_function
 double norm_pdf(const double x) 

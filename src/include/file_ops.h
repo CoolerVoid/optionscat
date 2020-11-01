@@ -10,7 +10,7 @@
 #include <stdbool.h>
 #include <errno.h>
 #include "mem_ops.h"
-#include "../lib/libmongoose/mongoose.h"
+#include "libmongoose/mongoose.h"
 // colors macros 
 #define RED "\033[22;31m"
 #define YELLOW "\033[01;33m"
