@@ -4,13 +4,13 @@ DFLAGS=-DMG_ENABLE_SSL -DMG_DISABLE_PFS lib/libmongoose/mongoose.c lib/BSD/strse
 HARDENING= -mmitigate-rop -fstack-protector-all -pie -fPIE -ftrapv
 DIR=src/
 DIROUT=bin/
-DIR_HEADERS=src/include/
+DIR_HEADERS=src/headers/
 UNAME_S := $(shell uname -s)
-#ifeq ($(UNAME_S),Darwin)
-LDFLAGS=-lpthread -lcrypto -lssl -lm 
-#else
-#	LDFLAGS=-Wl,-z,relro,-z,now -lpthread -lm -lcrypto -lssl
-#endif
+ifeq ($(UNAME_S),Darwin)
+ LDFLAGS=-lpthread -lcrypto -lssl -lm 
+else
+ LDFLAGS=-Wl,-z,relro,-z,now -lpthread -lm -lcrypto -lssl
+endif
 
 optionscat: $(DIR)optionscat.c 
 	@echo "Compile... "
